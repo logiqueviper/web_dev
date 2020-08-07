@@ -1,0 +1,5 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    {% for key in context_dict %}
+        <p> {{ key }} : {{ context_dict[key] }} </p>
+{% endblock content %}
