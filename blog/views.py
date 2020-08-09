@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import Registration,Get_Email
 from .models import User
+from django.db.models import Q
+from django.views.generic import TemplateView , ListView
 # Create your views here.
 def home(request):
     return render(request,'blog/home.html')
@@ -30,11 +32,12 @@ def getdata(request):
             curr_user.save()
     else:
         demo_reg = Registration()
+    #return HttpResponse('<p> thank you for joining us</p>')
     return render(request,'blog/getdata.html',{'demo_form':demo_reg})
 def inp_data(request):
-    curr_form = Get_Email()
-    
-    return  render(request,'blog/get_email.html',{ 'curr_form' : curr_form})
+    email = request.POST.get('email')
+    print(email)
+    return  render(request,'blog/get_email.html')
 def display_rel_data(request):
     if (request.method == 'POST'):
         email_form = Get_Email(request.POST)
@@ -46,3 +49,12 @@ def display_rel_data(request):
             'password_user':obj.password
         }
     return render(request, 'blog/show_details.html',context_dict)
+def search(request):
+    return render(request,'blog/search.html')
+def Fetch_data(request):
+    query = request.GET['q']
+    object_list = User.objects.filter(Q(email__icontains = query)|Q(name__icontains = query))
+    if object_list.count() != 0:
+        return render(request,'blog/redirect.html',{'object_list':object_list})
+    else:
+        return HttpResponse('<p> No user was found </p>')

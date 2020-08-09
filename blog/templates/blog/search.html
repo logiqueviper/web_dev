@@ -1,0 +1,7 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<h1> Search Here </h1>
+<form action = "{% url 'blog-redirect' %}" method = "get">
+<input name = "q" type = "text" placeholder =  "Nervous" > 
+</form>
+{% endblock content %}

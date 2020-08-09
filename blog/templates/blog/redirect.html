@@ -1,0 +1,9 @@
+{% extends "blog/base.html" %} 
+{% block content %}
+  {% for item in object_list %}
+    <p> {{ item.name }} </p>
+    <p> {{ item.email }} </p>
+    <p> {{ item.password }} </p> 
+    {% endfor %}
+  
+{% endblock %}

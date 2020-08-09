@@ -8,4 +8,6 @@ urlpatterns = [
     path('register_here/',views.getdata,name = 'blog-getdata'),
     path('display_data/',views.display_rel_data,name = 'blog-display_data'),
     path('inp_data/',views.inp_data,name='bolg-get_detail'),
+    path('tryenter/',views.search,name = 'blog-search'),
+    path('get_result/',views.Fetch_data,name = 'blog-redirect'),
 ]
